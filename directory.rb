@@ -1,14 +1,14 @@
 #lets puta all the students in an array 
 students = [
- "Dr Hannibal Lecter",
- "Darth Vader",
- "Nurse Ratchet",
- "Michael Corleone",
- "Alex De Large",
- "The Alien",
- "The Terminator",
- "Freddy Kruger",
- "The Joker"
+	{:name => "Dr Hannibal Lecter", :cohort => :november},
+	{:name => "Darth Vader", :cohort => :november},
+	{:name => "Nurse Ratchet", :cohort => :november},
+	{:name => "Michael Corleone", :cohort => :november},
+	{:name => "Alex De Large", :cohort => :november},
+	{:name => "The Alien", :cohort => :november},
+	{:name => "The Terminator", :cohort => :november},
+	{:name => "Freddy Kruger", :cohort => :november},
+	{:name => "The Joker", :cohort => :november}
 	]
 
 def print_header
@@ -16,9 +16,9 @@ puts  "The students of my cohort at Makers Academy"
 puts "-------------------------"
 end	
 
-def print(names)
-	names.each do |name|
-		puts name
+def print(students)
+	students.each do |student|
+		puts "#{student[:name]} (#{student[:cohort]} cohort)" #using a hash makes it better understood what we are doing.
 	end
 end
 
