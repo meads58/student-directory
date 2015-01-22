@@ -1,17 +1,23 @@
-student_count = 9
-#first we print the list of students
-puts "The students of my cohort at Makers Academy"
+#lets puta all the students in an array 
+students = [
+ "Dr Hannibal Lecter",
+ "Darth Vader",
+ "Nurse Ratchet",
+ "Michael Corleone",
+ "Alex De Large",
+ "The Alien",
+ "The Terminator",
+ "Freddy Kruger",
+ "The Joker"
+	]
+
+puts  "The students of my cohort at Makers Academy"
 puts "-------------------------"
-puts "Dr Hannibal Lecter"
-puts "Darth Vader"
-puts "Nurse Ratchet"
-puts "Michael Corleone"
-puts "Alex De Large"
-puts "The Alien"
-puts "The Terminator"
-puts "Freddy Kruger"
-puts "The Joker"
+students.each do |student|
+	puts student
+end
+
 #finally, we print the total
-puts "Overall we have #{student_count} great students"
+puts "Overall we have #{students.length} great students"
 
 
