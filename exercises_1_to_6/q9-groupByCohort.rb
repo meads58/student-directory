@@ -1,5 +1,29 @@
 #Q9 Once you complete the previous exercise, change the way the users are displayed: print them grouped by cohorts. To do this, you'll need to get a list of all existing cohorts (the map() method may be useful but it's not the only option), iterate over it and only print the students from that cohort.
 
+#======
+=begin my original solution looked like this
+find all the unique cohorts
+
+cohorts = []
+students.each do |i|
+  cohorts << i[2]
+  cohorts.uniq!
+end
+
+then iterate over the students table and build a new array using each unique cohort
+cohorts.each do |i|
+  students.each do |n|
+    if n.fetch(2) == i
+      students_grouped << n
+    end
+  end
+end
+
+googled and found that there is a group_by methody so used that instead
+=end
+
+
+
 def print_header
   puts  "The students of my cohort at Makers Academy".center(50)
   puts "-------------------------".center(50)
@@ -8,6 +32,7 @@ end
 
 
 def print(students)
+  puts students
   countlist = students.dup#without countlist just refs students and the shift will actually change students. Use 'dup' to make a copy of students and assign it to 'countlist'. Ruby passed by reference
 
     until countlist.length == 0 do
@@ -57,7 +82,8 @@ def input_students
     puts "now we have #{students.length} students"
   end
 
-    students#returns the array of students
+  #returns the array of students and groups them by cohort.
+    students.group_by{|key| key[:cohort]}.values.flatten#had to flatten as it puts it an array when returned.
 
 end
 
