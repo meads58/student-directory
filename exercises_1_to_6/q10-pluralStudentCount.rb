@@ -1,25 +1,14 @@
 #Q9 Once you complete the previous exercise, change the way the users are displayed: print them grouped by cohorts. To do this, you'll need to get a list of all existing cohorts (the map() method may be useful but it's not the only option), iterate over it and only print the students from that cohort.
 
 #======
-=begin my original solution looked like this
-find all the unique cohorts
+=begin
 
-cohorts = []
-students.each do |i|
-  cohorts << i[2]
-  cohorts.uniq!
+For this solution I created a pluaralize method to take the student
+array and count the number of students.
+
+If bigger that 1 it returns 's' which is added to any word.
+
 end
-
-then iterate over the students table and build a new array using each unique cohort
-cohorts.each do |i|
-  students.each do |n|
-    if n.fetch(2) == i
-      students_grouped << n
-    end
-  end
-end
-
-googled and found that there is a group_by methody so used that instead
 =end
 
 
@@ -44,7 +33,8 @@ end
 
 def print_footer(names)
   #finally, we print the total
-  puts "Overall we have #{names.length} great students".center(50)
+  puts "=======================".center(50)
+  puts "Overall we have #{names.length} great student#{@plural}".center(50)
 end
 
 def input_students
@@ -78,12 +68,21 @@ def input_students
 
     #add the student has to the array
     students << temp
-    puts "now we have #{students.length} students"
+    @plural = pluralize(students)
+    puts "now we have #{students.length} student#{@plural}".center(50)
+    puts "============================".center(50)
   end
 
   #returns the array of students and groups them by cohort.
-    students.group_by{|key| key[:cohort]}.values.flatten#had to flatten as it puts it an array when returned.
+    return students.group_by{|key| key[:cohort]}.values.flatten#had to flatten as it puts it an array when returned.
+end
 
+#will check the student count and return a 's' to pluralize the word with an s
+def pluralize student_list
+  if student_list.length > 1
+    return 's'
+  else ''
+  end
 end
 
 
