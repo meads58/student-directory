@@ -1,16 +1,11 @@
-#Q10 Right now if we have only one student, the user will see a message "Now we have 1 students", whereas it should be "Now we have 1 student". How can you fix it so that it used singular form when appropriate and plural form otherwise?
-
+#Q11 We've been using the chomp() method to get rid of the last return character. Find another method among those provided by the String class that could be used for the same purpose (although it will require passing some arguments).
 #======
 =begin
 
-For this solution I created a pluaralize method to take the student
-array and count the number of students.
+Replaced chomp with 'gsub(/\n/,'')'.
 
-If bigger that 1 it returns 's' which is added to any word.
-
-
+This looks for a \n and replaces it with ''.
 =end
-
 
 
 def print_header
@@ -57,13 +52,13 @@ def input_students
 
     keyArray.each do |key|#enter in the remaining attributes and sets a default value
       puts "Enter #{key}:"
-      val = gets.chomp.to_sym
+      val = gets.gsub(/\n/,'').to_sym
       val = 'n/a' if val.empty?
       temp[key] = val
     end
 
     puts "Press Enter to add student #{name} else type 'DEL' to remove"
-    update = gets.chomp.downcase
+    update = gets.gsub(/\n/,'').downcase
     next if update == 'del'#restart the loop and discard the last student
 
     #add the student has to the array
@@ -84,6 +79,9 @@ def pluralize student_list
   else ''
   end
 end
+
+
+
 
 
 students = input_students
