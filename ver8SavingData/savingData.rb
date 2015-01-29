@@ -15,12 +15,12 @@ end
 def print_menu
   puts "1. Input Students"
   puts "2. Show the Students"
+  puts "3. Save the inputs to students.csv"
   puts "9. Exit"
 end
 
 def show_students
   print_header
-  puts @students
   print_student_list
   print_footer
 end
@@ -31,6 +31,8 @@ def process(selection)
       input_students
     when "2"
       show_students
+    when "3"
+      save_students
     when "9"
       exit#this will exit the program
     else
@@ -81,7 +83,7 @@ def input_students
     if cohort.nil?
       temp[:cohort] = 'n/a'
       else temp[:cohort] = cohort#default value for cohort if empty
-      end
+    end
 
     keyArray.each do |key|#enter in the remaining attributes and sets a default value
       puts "Enter #{key}:"
@@ -115,11 +117,14 @@ end
 
 def save_students
   #open the file for writing
-  file = File.open("students.csv",w)
+  file = File.open("students.csv","w")#the 'w' will write to the 'students.csv' file. It will also truncate it to zero first e.g. clear everything out of this file first. If you used 'a' this would write to the end of the existing file e.g. append to the end.
   #iterate over the array of students
   @students.each do |student|
-    csv_line = student.join(",")
+    student_date = [student[:name], student[:cohort], student[:hobbies], student[:COB], student[:height]]#here we are putting the hash elements into an array so on the next line we can convert to a string with join.
+    csv_line = student_date.join(",")#join combines the array into one string uses ',' to separate the elements
+    file.puts csv_line#this line calls puts but writes to the file instead of the screen.
   end
+  file.close#everytime you open a file you need to close it. Until you close it you can't open it.
 end
 
 
