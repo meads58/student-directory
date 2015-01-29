@@ -16,6 +16,7 @@ def print_menu
   puts "1. Input Students"
   puts "2. Show the Students"
   puts "3. Save the inputs to students.csv"
+  puts "4. Load the list from students.csv"
   puts "9. Exit"
 end
 
@@ -33,6 +34,8 @@ def process(selection)
       show_students
     when "3"
       save_students
+    when "4"
+      student_load_file
     when "9"
       exit#this will exit the program
     else
@@ -54,7 +57,7 @@ def print_student_list
     until countlist.length == 0 do
       student = countlist.shift
         if student[:name].length < 12
-          puts "Name: #{student[:name]} (#{student[:cohort]} cohort) Hobbies: #{student[:hobbies]} COB: #{student[:COB]} Height: #{student[:height]}".center(50) #using a hash makes it better understood what we are doing.
+          puts "Name: #{student[:name]} (#{student[:cohort]} cohort.to_sym) Hobbies: #{student[:hobbies]} COB: #{student[:COB]} Height: #{student[:height]}".center(50) #using a hash makes it better understood what we are doing.
         end
     end
   else
@@ -126,6 +129,17 @@ def save_students
   end
   file.close#everytime you open a file you need to close it. Until you close it you can't open it.
 end
+
+def student_load_file
+  file = File.open("students.csv", "r")
+  file.readlines.each do |line|#read each line one at a time from the file.
+    name, cohort, hobbies, cob, height = line.chomp.split(',')#rParallel assignment, remove the trailing \n, then split line into an array at each ",".
+    @students << {:name => name, :cohort => cohort.to_sym, :hobbies => hobbies, :COB => cob, :height => height}#use the elements from the array to load the students in.
+  end
+  file.close#close the file.
+end
+
+
 
 interactive_menu
 
